@@ -21,20 +21,20 @@ let calculationHistory = [ '1+3', '1+4', '3+4' ];
 
 // will be an array of objects
 let resultObject = {
-  result: 'resultNumber',
+  result: 'RESULTNUMBER',
   history: calculationHistory
 };
 
-app.get('/result', (req, res) => {
+app.get('/calculation', (req, res) => {
   // should appear in the server terminal
   console.log( 'GET request received' );
 
-  // should reply with a response and the array of
+  // should reply with a response and the array of calculations
   res.send(resultObject);
 });
 
-app.post('/result', (req, res) => {
-  console.log( 'POST request received' );
+app.post('/calculation', (req, res) => {
+  console.log( 'POST request received', req.body );
 
   // should reply with a response and the array of
   res.sendStatus(201);
