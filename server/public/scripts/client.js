@@ -14,9 +14,14 @@ function onReady() {
         // should function like a submit button
     $( '#solve' ).on('click', addCalculation)
 
+    // listener for the clear button
+    $('#clear').on('click', clearInputs)
+
     // listener for the operator buttons
         // remember to use $(this) to grab the text from the button
     $('.operatorBtn').on('click', useOperator)
+
+    // initial GET request to populate the page
     getResult()
 }
 
@@ -25,6 +30,12 @@ function onReady() {
 function useOperator() {
     theOperator = $(this).text();
     console.log( 'this is theOperator:', theOperator );
+}
+
+// this function will clear the input fields of the form
+function clearInputs() {
+    $('#input1').val('');
+    $('#input2').val('');
 }
 
 // will be called in the POST to set value in object to be passed in POST data section
@@ -46,6 +57,7 @@ function getResult() {
         url: '/calculation'
     }).then((response) => {
         console.log( 'this should be an object with result and array of calculations', response );
+        render(response);
     }).catch((response) => {
         alert('GET request failed')
     })
@@ -76,4 +88,25 @@ function addCalculation() {
     }).catch((response)=> {
         alert('POST request failed')
     })
+}
+
+// expecting an object as the argument
+    // should add the result property to the #mathResult
+    // should add the history property to the #showWork
+function render( response ) {
+    console.log( 'render running' );
+    console.log( response.result );
+    console.log( response.history );
+    $('#mathResult').empty();
+    $('#showWork').empty();
+
+    $('#mathResult').append(`
+        <h2>${response.result}</h2>
+    `)
+
+    for( let calculation of response.history ) {
+        $('#showWork').append(`
+            <li>${calculation}</li>
+        `)
+    }
 }
