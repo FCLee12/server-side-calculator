@@ -66,28 +66,31 @@ function getResult() {
 // this will be the POST request
 function addCalculation() {
     console.log( 'addCalculation running' );
-
     calculateThese()
+    
+    if( firstInput == '' || secondInput == '' ) {
+        alert('Please enter a number in both input fields.')
+    } else {
+        // this object will be sent in the POST request
+            // input1 collected from input field 
+        let theCalculation = {
+            input1: firstInput,
+            input2: secondInput,
+            operator: theOperator 
+        }
 
-    // this object will be sent in the POST request
-        // input1 collected from input field 
-    let theCalculation = {
-        input1: firstInput,
-        input2: secondInput,
-        operator: theOperator 
+        $.ajax({
+            method: 'POST',
+            url: '/calculation',
+            data: theCalculation
+        }).then((response) => {
+            console.log( 'POST request successful' );
+            // this GET request will be to update the DOM
+            getResult()
+        }).catch((response)=> {
+            alert('POST request failed')
+        })
     }
-
-    $.ajax({
-        method: 'POST',
-        url: '/calculation',
-        data: theCalculation
-    }).then((response) => {
-        console.log( 'POST request successful' );
-        // this GET request will be to update the DOM
-        getResult()
-    }).catch((response)=> {
-        alert('POST request failed')
-    })
 }
 
 // expecting an object as the argument

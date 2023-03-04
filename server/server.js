@@ -23,7 +23,10 @@ let calculationHistory = [];
 let calculationTotal = 0;
 
 // will be an array of objects
-let resultObject = {};
+let resultObject = {
+  result: 'Result',
+  history: calculationHistory
+};
 
 app.get('/calculation', (req, res) => {
   // should appear in the server terminal
