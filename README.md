@@ -41,10 +41,10 @@ Node.js
 ### Usage
 
 1) Confirm your server is on by checking the terminal on VS Code (using control + ~) or your computer terminal for a log message: "Server is running on port 5000"
-  1a) If it's not giving you that log message, use the command: node server/server.js to start the server
-  1b) If the server is throwing an error, please verify dependencies are installed properly
-  1c) To force reset the server use the command: killall node
-      -If that is unsuccessful, use this one instead: killall -9 node
+  1) If it's not giving you that log message, use the command: node server/server.js to start the server
+  2) If the server is throwing an error, please verify dependencies are installed properly
+  3) To force reset the server use the command: killall node
+      3a) If that is unsuccessful, use this one instead: killall -9 node
 2) After confirming the server is running, go to your browser and enter localhost:5000 into the url bar and hit enter
 3) Enter any number in the input fields and the operator you would like to use
   3a) Please note, this calculator has limited functionality and can only handle two number calculations at this time
