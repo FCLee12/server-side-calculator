@@ -17,16 +17,13 @@ app.listen(PORT, () => {
 // will hold an array of calculations
   // these will be rendered to the DOM
   // will likely be attached as a value to a property in an object which will be sent back on a GET
-let calculationHistory = [ '1+3', '1+4', '3+4' ];
+let calculationHistory = [];
 
 // this will be replaced by the result of the calculation below
 let calculationTotal = 0;
 
 // will be an array of objects
-let resultObject = {
-  result: calculationTotal,
-  history: calculationHistory
-};
+let resultObject = {};
 
 app.get('/calculation', (req, res) => {
   // should appear in the server terminal
@@ -102,6 +99,13 @@ app.post('/calculation', (req, res) => {
   // this will push the calculationString into the calculationHistory array
   calculationHistory.push(calculationString);
   console.log( 'this is the updated calculationHistory:', calculationHistory );
+
+  // this should update the resultObject with the proper information to pull apart and render to the DOM on client-side
+  resultObject = {
+    result: calculationTotal,
+    history: calculationHistory
+  };
+  console.log( 'this is resultObject:', resultObject );
 
   // should reply with a response and the array of
   res.sendStatus(201);
