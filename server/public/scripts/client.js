@@ -71,6 +71,8 @@ function addCalculation() {
         data: theCalculation
     }).then((response) => {
         console.log( 'POST request successful' );
+        // this GET request will be to update the DOM
+        getResult()
     }).catch((response)=> {
         alert('POST request failed')
     })
